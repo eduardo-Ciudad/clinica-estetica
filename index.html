@@ -1,0 +1,999 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Procedimentos estéticos personalizados com segurança e naturalidade. Botox, Harmonização Facial, Preenchimento Labial e mais. Agende sua avaliação gratuita.">
+  <title>Lumière Clínica Estética | Traços Únicos. Resultado Natural.</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    /* ─── RESET ─────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+    body { font-family: 'Outfit', sans-serif; background: #faf7f3; color: #3e2814; overflow-x: hidden; }
+    img { max-width: 100%; height: auto; display: block; }
+    a { text-decoration: none; color: inherit; }
+
+    /* ─── TOKENS ─────────────────────────────────────────── */
+    :root {
+      --bg:       #faf7f3;
+      --nude:     #f0e4d8;
+      --nude-2:   #e4d0c0;
+      --gold:     #b8906a;
+      --gold-d:   #9a7248;
+      --dark:     #1e1208;
+      --dark-2:   #2e1e10;
+      --text:     #3e2814;
+      --text-2:   #7a5e48;
+      --text-3:   #a88a74;
+      --border:   #e0ccb8;
+      --white:    #ffffff;
+      --green:    #22c55e;
+      --r-sm:     10px;
+      --r-md:     20px;
+      --r-lg:     32px;
+      --ease:     cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    /* ─── TYPOGRAPHY ─────────────────────────────────────── */
+    .serif { font-family: 'Playfair Display', serif; }
+    .serif-i { font-family: 'Playfair Display', serif; font-style: italic; }
+
+    /* ─── UTILITIES ──────────────────────────────────────── */
+    .container { width: 100%; max-width: 1260px; margin: 0 auto; padding: 0 32px; }
+    .eyebrow {
+      display: inline-block; font-size: 11px; font-weight: 600;
+      letter-spacing: 3.5px; text-transform: uppercase; color: var(--gold);
+      margin-bottom: 14px;
+    }
+
+    /* ─── SCROLL ANIMATIONS ───────────────────────────────── */
+    .reveal { opacity: 0; transform: translateY(28px); transition: opacity .75s var(--ease), transform .75s var(--ease); }
+    .reveal.from-left  { transform: translateX(-40px); }
+    .reveal.from-right { transform: translateX(40px); }
+    .reveal.visible { opacity: 1; transform: translate(0); }
+    .d1 { transition-delay: .1s; }
+    .d2 { transition-delay: .2s; }
+    .d3 { transition-delay: .3s; }
+    .d4 { transition-delay: .4s; }
+    .d5 { transition-delay: .5s; }
+
+    /* ─── BUTTONS ─────────────────────────────────────────── */
+    .btn {
+      display: inline-flex; align-items: center; gap: 10px;
+      padding: 15px 30px; border-radius: 100px;
+      font-family: 'Outfit', sans-serif; font-size: 15px; font-weight: 600;
+      border: none; cursor: pointer; transition: transform .25s var(--ease), box-shadow .25s var(--ease), background .25s ease;
+      white-space: nowrap;
+    }
+    .btn:active { transform: scale(0.98) !important; }
+
+    .btn-gold {
+      background: var(--gold); color: var(--white);
+      box-shadow: 0 4px 18px rgba(184,144,106,.35);
+    }
+    .btn-gold:hover { background: var(--gold-d); transform: translateY(-2px); box-shadow: 0 8px 28px rgba(184,144,106,.45); }
+
+    .btn-ghost {
+      background: transparent; color: var(--white);
+      border: 1.5px solid rgba(255,255,255,.35);
+    }
+    .btn-ghost:hover { background: rgba(255,255,255,.1); transform: translateY(-2px); }
+
+    .btn-wa {
+      background: #25d366; color: var(--white); font-size: 16px; padding: 18px 36px;
+      box-shadow: 0 4px 22px rgba(37,211,102,.35);
+    }
+    .btn-wa:hover { background: #1cb954; transform: translateY(-2px); box-shadow: 0 8px 32px rgba(37,211,102,.45); }
+
+    .btn-outline-gold {
+      background: transparent; color: var(--gold);
+      border: 1.5px solid var(--gold);
+    }
+    .btn-outline-gold:hover { background: var(--gold); color: var(--white); transform: translateY(-2px); }
+
+    /* ─── NAVIGATION ──────────────────────────────────────── */
+    #nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 900;
+      padding: 22px 0;
+      transition: background .35s ease, padding .35s ease, box-shadow .35s ease;
+    }
+    #nav.scrolled {
+      background: rgba(250,247,243,.96);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      padding: 14px 0;
+      box-shadow: 0 1px 24px rgba(62,40,20,.07);
+    }
+    .nav-inner { display: flex; align-items: center; justify-content: space-between; }
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 22px; letter-spacing: .5px;
+      color: var(--white); transition: color .3s ease;
+    }
+    .nav-logo span { color: var(--gold); }
+    #nav.scrolled .nav-logo { color: var(--dark); }
+    .nav-cta { display: block; }
+
+    /* ─── HERO ────────────────────────────────────────────── */
+    .hero {
+      display: grid;
+      grid-template-columns: 55fr 45fr;
+      min-height: 100dvh;
+    }
+    .hero-panel {
+      background: var(--dark);
+      padding: 140px 72px 80px;
+      display: flex; flex-direction: column; justify-content: center;
+      position: relative; overflow: hidden;
+    }
+    .hero-panel::before {
+      content: '';
+      position: absolute; top: -30%; right: -10%;
+      width: 480px; height: 480px;
+      background: radial-gradient(ellipse, rgba(184,144,106,.18) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.14);
+      color: rgba(255,255,255,.75); font-size: 13px;
+      padding: 7px 16px; border-radius: 100px; margin-bottom: 28px; width: fit-content;
+    }
+    .hero-badge-dot { width: 7px; height: 7px; background: var(--green); border-radius: 50%; flex-shrink: 0; animation: pulse-dot 2s ease infinite; }
+    @keyframes pulse-dot { 0%,100%{ opacity:1; } 50%{ opacity:.4; } }
+
+    .hero-h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(38px, 4.5vw, 62px);
+      line-height: 1.08; font-weight: 700;
+      color: var(--white); margin-bottom: 22px;
+    }
+    .hero-h1 em { color: var(--gold); font-style: italic; }
+    .hero-sub { font-size: 17px; line-height: 1.75; color: rgba(255,255,255,.68); margin-bottom: 44px; max-width: 440px; }
+    .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 60px; }
+
+    .hero-trust { display: flex; align-items: center; gap: 18px; }
+    .trust-avatars { display: flex; }
+    .trust-avatars img { width: 38px; height: 38px; border-radius: 50%; border: 2px solid var(--dark); object-fit: cover; margin-left: -10px; }
+    .trust-avatars img:first-child { margin-left: 0; }
+    .trust-text { font-size: 13px; color: rgba(255,255,255,.6); }
+    .trust-text strong { display: block; color: rgba(255,255,255,.88); font-size: 14px; margin-bottom: 1px; }
+
+    .hero-photo {
+      position: relative; overflow: hidden;
+    }
+    .hero-photo img {
+      width: 100%; height: 100%; object-fit: cover;
+      transition: transform 6s ease;
+    }
+    .hero-photo:hover img { transform: scale(1.03); }
+    .hero-photo-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to right, rgba(30,18,8,.28) 0%, transparent 40%);
+    }
+
+    /* ─── STATS STRIP ─────────────────────────────────────── */
+    .stats { background: var(--nude); border-bottom: 1px solid var(--border); }
+    .stats-row {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+    }
+    .stat {
+      text-align: center; padding: 28px 20px;
+      border-right: 1px solid var(--border);
+    }
+    .stat:last-child { border-right: none; }
+    .stat-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 34px; color: var(--gold); font-weight: 700; line-height: 1;
+    }
+    .stat-label { font-size: 13px; color: var(--text-2); margin-top: 5px; }
+
+    /* ─── SECTION SHARED ──────────────────────────────────── */
+    .section { padding: 100px 0; }
+    .section-alt { background: var(--nude); }
+
+    .section-head { margin-bottom: 60px; }
+    .section-head.center { text-align: center; }
+    .section-head.center .section-subtitle { margin: 0 auto; }
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(30px, 3.8vw, 48px); line-height: 1.15;
+      color: var(--dark); margin-bottom: 16px;
+    }
+    .section-subtitle { font-size: 16px; color: var(--text-2); line-height: 1.8; max-width: 540px; }
+
+    /* ─── PROCEDURES ──────────────────────────────────────── */
+    .procedures-layout {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 64px; align-items: start;
+    }
+    .procedures-intro { position: sticky; top: 120px; }
+    .procedures-intro .section-subtitle { margin-bottom: 28px; }
+
+    .procedures-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 20px;
+    }
+    .proc-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--r-md);
+      padding: 28px 28px 24px;
+      transition: transform .3s var(--ease), box-shadow .3s var(--ease), border-color .3s ease;
+    }
+    .proc-card:hover { transform: translateY(-5px); box-shadow: 0 16px 48px rgba(62,40,20,.1); border-color: var(--nude-2); }
+    .proc-icon {
+      width: 44px; height: 44px;
+      background: var(--nude); border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 18px; color: var(--gold);
+    }
+    .proc-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 20px; color: var(--dark); margin-bottom: 10px;
+    }
+    .proc-desc { font-size: 14px; color: var(--text-2); line-height: 1.7; margin-bottom: 20px; }
+    .proc-tag { font-size: 12px; color: var(--gold); font-weight: 600; margin-bottom: 20px; display: block; }
+
+    /* ─── BEFORE / AFTER ──────────────────────────────────── */
+    .ba-intro {
+      display: grid; grid-template-columns: 1.4fr 1fr;
+      gap: 80px; align-items: end; margin-bottom: 48px;
+    }
+    .ba-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+
+    .ba-slider {
+      position: relative; overflow: hidden;
+      border-radius: var(--r-md); cursor: col-resize;
+      user-select: none; -webkit-user-select: none;
+      aspect-ratio: 4/5; background: var(--nude-2);
+    }
+    .ba-img {
+      position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
+    }
+    .ba-before-layer {
+      position: absolute; inset: 0; overflow: hidden;
+      clip-path: inset(0 50% 0 0);
+      transition: clip-path 0s;
+    }
+    .ba-before-layer .ba-img { filter: grayscale(.45) brightness(.88) saturate(.7); }
+    .ba-handle-line {
+      position: absolute; top: 0; bottom: 0; left: 50%;
+      width: 2px; background: var(--white);
+      transform: translateX(-50%);
+      pointer-events: none;
+    }
+    .ba-handle-btn {
+      position: absolute; top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 40px; height: 40px;
+      background: var(--white); border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 2px 12px rgba(0,0,0,.2); color: var(--text-2);
+      pointer-events: none;
+    }
+    .ba-label {
+      position: absolute; top: 16px;
+      font-size: 11px; font-weight: 600; letter-spacing: 2px;
+      text-transform: uppercase; color: var(--white);
+      background: rgba(30,18,8,.5); backdrop-filter: blur(4px);
+      padding: 4px 12px; border-radius: 100px; pointer-events: none;
+    }
+    .ba-label.left { left: 16px; }
+    .ba-label.right { right: 16px; }
+    .ba-meta { margin-top: 14px; }
+    .ba-proc-name { font-weight: 600; font-size: 15px; color: var(--dark); margin-bottom: 2px; }
+    .ba-note { font-size: 13px; color: var(--text-3); }
+
+    .ba-note-legal {
+      margin-top: 24px; font-size: 12px; color: var(--text-3);
+      text-align: center; font-style: italic;
+    }
+
+    /* ─── PROFESSIONAL ────────────────────────────────────── */
+    .pro-layout {
+      display: grid; grid-template-columns: 5fr 7fr;
+      gap: 80px; align-items: center;
+    }
+    .pro-photo-wrap { position: relative; }
+    .pro-photo {
+      width: 100%; aspect-ratio: 4/5; object-fit: cover;
+      border-radius: var(--r-lg);
+    }
+    .pro-card {
+      position: absolute; bottom: -24px; right: -24px;
+      background: var(--white); border-radius: var(--r-md);
+      padding: 18px 24px; border: 1px solid var(--border);
+      box-shadow: 0 12px 40px rgba(62,40,20,.1);
+    }
+    .pro-card-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 36px; color: var(--gold); font-weight: 700; line-height: 1;
+    }
+    .pro-card-label { font-size: 12px; color: var(--text-2); margin-top: 3px; }
+
+    .pro-content { padding-right: 24px; }
+    .pro-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 36px; color: var(--dark); margin-bottom: 6px;
+    }
+    .pro-title { font-size: 15px; color: var(--gold); font-weight: 500; margin-bottom: 24px; letter-spacing: .4px; }
+    .pro-bio { font-size: 16px; color: var(--text-2); line-height: 1.85; margin-bottom: 36px; }
+
+    .creds { display: flex; flex-direction: column; gap: 14px; margin-bottom: 40px; }
+    .cred { display: flex; align-items: center; gap: 14px; font-size: 15px; color: var(--text-2); }
+    .cred-icon {
+      width: 32px; height: 32px; flex-shrink: 0;
+      background: var(--nude); border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--gold);
+    }
+
+    /* ─── TESTIMONIALS ────────────────────────────────────── */
+    .testi-layout {
+      display: grid;
+      grid-template-columns: 7fr 5fr;
+      gap: 32px; align-items: stretch;
+    }
+    .testi-featured {
+      background: var(--dark); border-radius: var(--r-lg);
+      padding: 52px 48px; position: relative; overflow: hidden;
+    }
+    .testi-featured::before {
+      content: '\201C';
+      font-family: 'Playfair Display', serif;
+      font-size: 180px; line-height: 1;
+      color: rgba(184,144,106,.15);
+      position: absolute; top: -20px; left: 30px;
+      pointer-events: none;
+    }
+    .testi-featured .stars { color: var(--gold); font-size: 18px; letter-spacing: 3px; margin-bottom: 24px; }
+    .testi-featured .quote {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(18px, 2vw, 24px); font-style: italic;
+      color: rgba(255,255,255,.88); line-height: 1.65;
+      margin-bottom: 36px; position: relative; z-index: 1;
+    }
+    .testi-featured .author { display: flex; align-items: center; gap: 16px; }
+    .testi-featured .author img { width: 52px; height: 52px; border-radius: 50%; object-fit: cover; border: 2px solid rgba(255,255,255,.15); }
+    .testi-featured .author-name { font-weight: 600; color: var(--white); font-size: 15px; }
+    .testi-featured .author-proc { font-size: 13px; color: var(--gold); margin-top: 2px; }
+
+    .testi-stack { display: flex; flex-direction: column; gap: 20px; }
+    .testi-card {
+      background: var(--white); border: 1px solid var(--border);
+      border-radius: var(--r-md); padding: 28px 28px 24px;
+      transition: transform .3s var(--ease), box-shadow .3s var(--ease);
+    }
+    .testi-card:hover { transform: translateY(-3px); box-shadow: 0 12px 36px rgba(62,40,20,.08); }
+    .testi-card .stars { color: #f59e0b; font-size: 14px; letter-spacing: 2px; margin-bottom: 14px; }
+    .testi-card .quote { font-size: 14px; color: var(--text-2); line-height: 1.7; font-style: italic; margin-bottom: 18px; }
+    .testi-card .author { display: flex; align-items: center; gap: 12px; }
+    .testi-card .author img { width: 42px; height: 42px; border-radius: 50%; object-fit: cover; }
+    .testi-card .author-name { font-weight: 600; font-size: 14px; color: var(--dark); }
+    .testi-card .author-proc { font-size: 12px; color: var(--gold); margin-top: 1px; }
+
+    /* ─── FINAL CTA ───────────────────────────────────────── */
+    .cta-section {
+      background: var(--dark);
+      padding: 100px 0; position: relative; overflow: hidden;
+    }
+    .cta-section::before {
+      content: '';
+      position: absolute; top: -50%; left: 50%; transform: translateX(-50%);
+      width: 800px; height: 800px;
+      background: radial-gradient(ellipse, rgba(184,144,106,.14) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .cta-inner { text-align: center; position: relative; z-index: 1; }
+    .cta-eyebrow { color: var(--gold); }
+    .cta-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(32px, 4.5vw, 56px); line-height: 1.15;
+      color: var(--white); margin-bottom: 20px;
+    }
+    .cta-title em { color: var(--gold); font-style: italic; }
+    .cta-sub { font-size: 17px; color: rgba(255,255,255,.6); max-width: 480px; margin: 0 auto 44px; line-height: 1.7; }
+    .cta-note { font-size: 13px; color: rgba(255,255,255,.3); margin-top: 18px; }
+
+    /* ─── FOOTER ──────────────────────────────────────────── */
+    footer {
+      background: #120c04; padding: 56px 0 32px;
+      color: rgba(255,255,255,.45);
+    }
+    .footer-grid {
+      display: grid; grid-template-columns: 1.6fr 1fr 1fr;
+      gap: 48px; margin-bottom: 48px;
+    }
+    .footer-logo { font-family: 'Playfair Display', serif; font-size: 20px; color: var(--white); margin-bottom: 14px; }
+    .footer-logo span { color: var(--gold); }
+    .footer-desc { font-size: 14px; line-height: 1.7; max-width: 260px; }
+    .footer-col h4 {
+      font-size: 11px; font-weight: 600; letter-spacing: 2.5px;
+      text-transform: uppercase; color: rgba(255,255,255,.55);
+      margin-bottom: 18px;
+    }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 11px; }
+    .footer-col ul li { font-size: 14px; }
+    .footer-col ul a { transition: color .2s ease; }
+    .footer-col ul a:hover { color: var(--gold); }
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,.07);
+      padding-top: 28px; display: flex;
+      justify-content: space-between; align-items: center;
+      font-size: 13px; flex-wrap: wrap; gap: 10px;
+    }
+    .footer-heart { color: var(--gold); }
+
+    /* ─── WHATSAPP FLOAT ──────────────────────────────────── */
+    .wa-float {
+      position: fixed; bottom: 28px; right: 28px; z-index: 800;
+      width: 62px; height: 62px; border-radius: 50%;
+      background: #25d366; color: var(--white);
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 4px 24px rgba(37,211,102,.45);
+      transition: transform .25s var(--ease), box-shadow .25s ease;
+    }
+    .wa-float:hover { transform: scale(1.1); box-shadow: 0 8px 36px rgba(37,211,102,.55); }
+    .wa-float::before {
+      content: ''; position: absolute; inset: 0; border-radius: 50%;
+      background: rgba(37,211,102,.35);
+      animation: wa-ring 2.2s ease-out infinite;
+    }
+    @keyframes wa-ring { 0%{ transform: scale(1); opacity:.8; } 100%{ transform: scale(1.85); opacity: 0; } }
+
+    .wa-tooltip {
+      position: absolute; right: 72px; top: 50%; transform: translateY(-50%);
+      background: var(--white); color: var(--dark); font-size: 13px; font-weight: 500;
+      padding: 8px 16px; border-radius: 100px; white-space: nowrap;
+      box-shadow: 0 4px 18px rgba(0,0,0,.1);
+      opacity: 0; pointer-events: none;
+      transition: opacity .25s ease;
+    }
+    .wa-float:hover .wa-tooltip { opacity: 1; }
+
+    /* ─── DIVIDER ─────────────────────────────────────────── */
+    .hr { border: none; border-top: 1px solid var(--border); margin: 0; }
+
+    /* ─── RESPONSIVE ──────────────────────────────────────── */
+    @media (max-width: 1024px) {
+      .procedures-layout { grid-template-columns: 1fr; gap: 40px; }
+      .procedures-intro { position: static; }
+      .pro-layout { grid-template-columns: 1fr 1fr; gap: 48px; }
+      .pro-content { padding-right: 0; }
+      .testi-layout { grid-template-columns: 1fr; }
+      .testi-featured { order: -1; }
+    }
+
+    @media (max-width: 768px) {
+      .container { padding: 0 20px; }
+      .section { padding: 72px 0; }
+
+      /* NAV */
+      .nav-cta { display: none; }
+
+      /* HERO */
+      .hero { grid-template-columns: 1fr; grid-template-rows: 52vw auto; min-height: auto; }
+      .hero-panel { padding: 48px 24px 60px; order: 2; }
+      .hero-photo { order: 1; height: 52vw; min-height: 260px; }
+      .hero-h1 { font-size: clamp(30px, 8vw, 44px); }
+      .hero-sub { font-size: 15px; margin-bottom: 32px; }
+      .hero-actions { flex-direction: column; gap: 12px; }
+      .hero-actions .btn { justify-content: center; }
+      .hero-badge { display: none; }
+
+      /* STATS */
+      .stats-row { grid-template-columns: 1fr 1fr; }
+      .stat:nth-child(2) { border-right: none; }
+      .stat { border-bottom: 1px solid var(--border); }
+      .stat:nth-child(3), .stat:nth-child(4) { border-bottom: none; }
+
+      /* PROCEDURES */
+      .procedures-grid { grid-template-columns: 1fr; }
+
+      /* BEFORE/AFTER */
+      .ba-intro { grid-template-columns: 1fr; gap: 16px; margin-bottom: 32px; }
+      .ba-grid { grid-template-columns: 1fr; }
+
+      /* PROFESSIONAL */
+      .pro-layout { grid-template-columns: 1fr; }
+      .pro-photo-wrap { max-width: 320px; margin: 0 auto; }
+      .pro-card { right: 0; }
+
+      /* TESTIMONIALS */
+      .testi-featured { padding: 36px 28px; }
+      .testi-featured .quote { font-size: 18px; }
+      .testi-stack { gap: 16px; }
+
+      /* FOOTER */
+      .footer-grid { grid-template-columns: 1fr; gap: 32px; }
+      .footer-bottom { flex-direction: column; text-align: center; gap: 8px; }
+
+      /* WA TOOLTIP */
+      .wa-tooltip { display: none; }
+    }
+
+    @media (max-width: 480px) {
+      .stats-row { grid-template-columns: 1fr 1fr; }
+      .ba-slider { aspect-ratio: 3/4; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ─────────────── NAVIGATION ─────────────────────── -->
+  <nav id="nav">
+    <div class="container">
+      <div class="nav-inner">
+        <a href="#" class="nav-logo">Lumière<span>.</span></a>
+        <a href="https://wa.me/5511999999999?text=Olá!%20Gostaria%20de%20agendar%20minha%20avaliação%20gratuita."
+           class="btn btn-gold nav-cta" target="_blank" rel="noopener">
+          Agendar Avaliação
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ─────────────── HERO ────────────────────────────── -->
+  <header class="hero">
+
+    <div class="hero-panel">
+      <div class="hero-badge reveal">
+        <span class="hero-badge-dot"></span>
+        Avaliações gratuitas disponíveis
+      </div>
+
+      <h1 class="hero-h1 reveal d1">
+        Traços únicos.<br><em>Resultado natural.</em>
+      </h1>
+
+      <p class="hero-sub reveal d2">
+        Procedimentos personalizados para realçar o que você já tem de mais bonito — com segurança, técnica e cuidado real.
+      </p>
+
+      <div class="hero-actions reveal d3">
+        <a href="https://wa.me/5511999999999?text=Olá!%20Gostaria%20de%20agendar%20minha%20avaliação%20gratuita."
+           class="btn btn-wa" target="_blank" rel="noopener">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+          </svg>
+          Agendar Avaliação Gratuita
+        </a>
+        <a href="#procedimentos" class="btn btn-ghost">
+          Ver Procedimentos
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+
+      <div class="hero-trust reveal d4">
+        <div class="trust-avatars">
+          <img src="https://picsum.photos/seed/lm-t1/80/80" alt="Cliente">
+          <img src="https://picsum.photos/seed/lm-t2/80/80" alt="Cliente">
+          <img src="https://picsum.photos/seed/lm-t3/80/80" alt="Cliente">
+        </div>
+        <div class="trust-text">
+          <strong>+840 clientes atendidas</strong>
+          Avaliação 4.9 no Google
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-photo">
+      <img src="https://picsum.photos/seed/lm-hero/900/1200" alt="Procedimento estético com resultado natural">
+      <div class="hero-photo-overlay"></div>
+    </div>
+
+  </header>
+
+  <!-- ─────────────── STATS ────────────────────────────── -->
+  <section class="stats">
+    <div class="container">
+      <div class="stats-row">
+        <div class="stat reveal">
+          <div class="stat-num">8+</div>
+          <div class="stat-label">Anos de experiência</div>
+        </div>
+        <div class="stat reveal d1">
+          <div class="stat-num">840</div>
+          <div class="stat-label">Clientes atendidas</div>
+        </div>
+        <div class="stat reveal d2">
+          <div class="stat-num">4.9</div>
+          <div class="stat-label">Média de avaliações</div>
+        </div>
+        <div class="stat reveal d3">
+          <div class="stat-num">100%</div>
+          <div class="stat-label">Produtos certificados</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─────────────── PROCEDURES ───────────────────────── -->
+  <section class="section" id="procedimentos">
+    <div class="container">
+      <div class="procedures-layout">
+
+        <div class="procedures-intro">
+          <span class="eyebrow reveal">Nossos Procedimentos</span>
+          <h2 class="section-title reveal d1">
+            Cuidados que <em class="serif-i" style="color:var(--gold)">transformam</em><br>sem apagar você
+          </h2>
+          <p class="section-subtitle reveal d2" style="margin-bottom:28px">
+            Cada tratamento começa com escuta. Entendemos seus objetivos antes de propor qualquer procedimento.
+          </p>
+          <a href="https://wa.me/5511999999999?text=Olá!%20Gostaria%20de%20saber%20mais%20sobre%20os%20procedimentos."
+             class="btn btn-outline-gold reveal d3" target="_blank" rel="noopener">
+            Fale com a especialista
+          </a>
+        </div>
+
+        <div class="procedures-grid">
+
+          <div class="proc-card reveal">
+            <div class="proc-icon" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            </div>
+            <h3 class="proc-name">Botox</h3>
+            <p class="proc-desc">Suavize linhas de expressão e recupere a aparência mais descansada com aplicação precisa e resultado natural.</p>
+            <span class="proc-tag">A partir de R$ 650</span>
+            <a href="https://wa.me/5511999999999?text=Olá!%20Tenho%20interesse%20em%20Botox." class="btn btn-outline-gold" target="_blank" rel="noopener" style="padding:11px 22px;font-size:13px">Agendar</a>
+          </div>
+
+          <div class="proc-card reveal d1">
+            <div class="proc-icon" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5c-4 0-7 3-7 6 0 2.5 1.5 4.5 4 5.5 1 .4 2 .5 3 .5s2-.1 3-.5c2.5-1 4-3 4-5.5 0-3-3-6-7-6z"/><path d="M9 11c.5 1 1.5 2 3 2s2.5-1 3-2"/></svg>
+            </div>
+            <h3 class="proc-name">Preenchimento Labial</h3>
+            <p class="proc-desc">Lábios mais definidos e volumosos, com resultado harmonioso que respeita a proporção natural do seu rosto.</p>
+            <span class="proc-tag">A partir de R$ 800</span>
+            <a href="https://wa.me/5511999999999?text=Olá!%20Tenho%20interesse%20em%20Preenchimento%20Labial." class="btn btn-outline-gold" target="_blank" rel="noopener" style="padding:11px 22px;font-size:13px">Agendar</a>
+          </div>
+
+          <div class="proc-card reveal d2">
+            <div class="proc-icon" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a9 9 0 00-4 17.1V21l4-1 4 1v-1.9A9 9 0 0012 2z"/><path d="M9 9h6M9 13h4"/></svg>
+            </div>
+            <h3 class="proc-name">Limpeza de Pele</h3>
+            <p class="proc-desc">Pele limpa, hidratada e luminosa. Remoção de impurezas profundas com protocolos personalizados para o seu tipo de pele.</p>
+            <span class="proc-tag">A partir de R$ 250</span>
+            <a href="https://wa.me/5511999999999?text=Olá!%20Tenho%20interesse%20em%20Limpeza%20de%20Pele." class="btn btn-outline-gold" target="_blank" rel="noopener" style="padding:11px 22px;font-size:13px">Agendar</a>
+          </div>
+
+          <div class="proc-card reveal d3">
+            <div class="proc-icon" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M6 20v-2a6 6 0 0112 0v2"/><line x1="12" y1="12" x2="12" y2="16"/></svg>
+            </div>
+            <h3 class="proc-name">Harmonização Facial</h3>
+            <p class="proc-desc">Equilíbrio entre todos os traços do rosto através de protocolos combinados, preservando sempre a sua identidade.</p>
+            <span class="proc-tag">A partir de R$ 1.200</span>
+            <a href="https://wa.me/5511999999999?text=Olá!%20Tenho%20interesse%20em%20Harmonização%20Facial." class="btn btn-outline-gold" target="_blank" rel="noopener" style="padding:11px 22px;font-size:13px">Agendar</a>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="hr">
+
+  <!-- ─────────────── BEFORE / AFTER ──────────────────── -->
+  <section class="section section-alt" id="resultados">
+    <div class="container">
+
+      <div class="ba-intro">
+        <div>
+          <span class="eyebrow reveal">Resultados Reais</span>
+          <h2 class="section-title reveal d1">
+            Antes e<br><em class="serif-i" style="color:var(--gold)">depois</em>
+          </h2>
+        </div>
+        <div>
+          <p class="section-subtitle reveal d2">
+            Arraste o divisor para comparar. Resultados naturais que preservam quem você é.
+          </p>
+        </div>
+      </div>
+
+      <div class="ba-grid">
+
+        <!-- Slider 1 -->
+        <div class="reveal">
+          <div class="ba-slider" id="slider1" data-init="true">
+            <img class="ba-img" src="https://picsum.photos/seed/lm-ba1/700/900" alt="Resultado após procedimento">
+            <div class="ba-before-layer" id="s1-before">
+              <img class="ba-img" src="https://picsum.photos/seed/lm-ba1/700/900" alt="Antes do procedimento">
+            </div>
+            <div class="ba-handle-line" id="s1-line"></div>
+            <div class="ba-handle-btn" id="s1-btn" aria-hidden="true">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M7 16l-4-4 4-4M17 8l4 4-4 4"/></svg>
+            </div>
+            <span class="ba-label left">Antes</span>
+            <span class="ba-label right">Depois</span>
+          </div>
+          <div class="ba-meta">
+            <div class="ba-proc-name">Botox + Preenchimento</div>
+            <div class="ba-note">Resultado após 15 dias · Aspecto natural</div>
+          </div>
+        </div>
+
+        <!-- Slider 2 -->
+        <div class="reveal d1">
+          <div class="ba-slider" id="slider2">
+            <img class="ba-img" src="https://picsum.photos/seed/lm-ba2/700/900" alt="Resultado após procedimento">
+            <div class="ba-before-layer" id="s2-before">
+              <img class="ba-img" src="https://picsum.photos/seed/lm-ba2/700/900" alt="Antes do procedimento">
+            </div>
+            <div class="ba-handle-line" id="s2-line"></div>
+            <div class="ba-handle-btn" id="s2-btn" aria-hidden="true">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M7 16l-4-4 4-4M17 8l4 4-4 4"/></svg>
+            </div>
+            <span class="ba-label left">Antes</span>
+            <span class="ba-label right">Depois</span>
+          </div>
+          <div class="ba-meta">
+            <div class="ba-proc-name">Harmonização Facial</div>
+            <div class="ba-note">Resultado após 30 dias · Processo seguro</div>
+          </div>
+        </div>
+
+      </div>
+
+      <p class="ba-note-legal reveal">Imagens ilustrativas. Resultados individuais podem variar. Consulte nossa especialista.</p>
+
+    </div>
+  </section>
+
+  <!-- ─────────────── PROFESSIONAL ─────────────────────── -->
+  <section class="section" id="sobre">
+    <div class="container">
+      <div class="pro-layout">
+
+        <div class="pro-photo-wrap reveal from-left">
+          <img src="https://picsum.photos/seed/lm-pro/700/900" alt="Dra. Isabela Fontana" class="pro-photo">
+          <div class="pro-card">
+            <div class="pro-card-num">840+</div>
+            <div class="pro-card-label">procedimentos<br>realizados</div>
+          </div>
+        </div>
+
+        <div class="pro-content reveal from-right">
+          <span class="eyebrow">Conheça a Especialista</span>
+          <h2 class="pro-name">Dra. Isabela Fontana</h2>
+          <p class="pro-title">Médica Esteta · CRM-SP 143.872</p>
+          <p class="pro-bio">
+            Especialista em estética avançada e harmonização facial, atendo cada paciente com escuta real e olhar clínico apurado. Minha missão é equilibrar técnica e sensibilidade — para que você saia da clínica se reconhecendo, só que melhor.
+          </p>
+
+          <div class="creds">
+            <div class="cred">
+              <div class="cred-icon" aria-hidden="true">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              </div>
+              Pós-graduada em Medicina Estética — USP
+            </div>
+            <div class="cred">
+              <div class="cred-icon" aria-hidden="true">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              </div>
+              Certificada em Harmonização Facial — ABME
+            </div>
+            <div class="cred">
+              <div class="cred-icon" aria-hidden="true">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              </div>
+              Formação internacional — Paris e Miami
+            </div>
+            <div class="cred">
+              <div class="cred-icon" aria-hidden="true">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              </div>
+              Parceira certificada Allergan e Merz
+            </div>
+          </div>
+
+          <a href="https://wa.me/5511999999999?text=Olá%20Dra.%20Isabela!%20Gostaria%20de%20agendar%20uma%20consulta."
+             class="btn btn-gold" target="_blank" rel="noopener">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+            Conversar com a Dra. Isabela
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ─────────────── TESTIMONIALS ─────────────────────── -->
+  <section class="section section-alt" id="depoimentos">
+    <div class="container">
+
+      <div class="section-head center">
+        <span class="eyebrow reveal">Depoimentos</span>
+        <h2 class="section-title reveal d1">O que nossas clientes <em class="serif-i" style="color:var(--gold)">dizem</em></h2>
+      </div>
+
+      <div class="testi-layout">
+
+        <div class="testi-featured reveal from-left">
+          <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p class="quote">
+            "Fiz harmonização facial e fiquei completamente apaixonada. O resultado ficou incrivelmente natural — todos perguntam o que eu fiz mas não conseguem identificar. Me sinto mais eu mesma, só que melhor."
+          </p>
+          <div class="author">
+            <img src="https://picsum.photos/seed/lm-tf1/104/104" alt="Mariana Cavalcante">
+            <div>
+              <div class="author-name">Mariana Cavalcante</div>
+              <div class="author-proc">Harmonização Facial</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="testi-stack reveal from-right">
+          <div class="testi-card">
+            <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+            <p class="quote">"Tinha muito medo de fazer botox, mas a Dra. Isabela me explicou cada etapa com clareza. O resultado ficou exatamente como eu queria. Já marquei o retorno!"</p>
+            <div class="author">
+              <img src="https://picsum.photos/seed/lm-ts1/84/84" alt="Renata Borges">
+              <div>
+                <div class="author-name">Renata Borges</div>
+                <div class="author-proc">Botox</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="testi-card d1">
+            <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+            <p class="quote">"Fiz preenchimento labial e adorei. Natural, sem exagero, exatamente o que pedi. O ambiente é acolhedor e a atenção dela é diferente de qualquer outro lugar."</p>
+            <div class="author">
+              <img src="https://picsum.photos/seed/lm-ts2/84/84" alt="Giovana Leal">
+              <div>
+                <div class="author-name">Giovana Leal</div>
+                <div class="author-proc">Preenchimento Labial</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ─────────────── FINAL CTA ─────────────────────────── -->
+  <section class="cta-section">
+    <div class="container">
+      <div class="cta-inner">
+        <span class="eyebrow cta-eyebrow reveal">Pronta para começar?</span>
+        <h2 class="cta-title reveal d1">
+          O primeiro passo para<br>a sua <em>melhor versão</em>
+        </h2>
+        <p class="cta-sub reveal d2">
+          Agende sua avaliação gratuita. Sem compromisso, sem pressão — só você e o cuidado que você merece.
+        </p>
+        <a href="https://wa.me/5511999999999?text=Olá!%20Quero%20agendar%20minha%20avaliação%20gratuita%20na%20Clínica%20Lumière."
+           class="btn btn-wa reveal d3" target="_blank" rel="noopener">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+          Agendar agora no WhatsApp
+        </a>
+        <p class="cta-note reveal d4">Resposta em até 5 minutos &middot; Segunda a Sábado, 9h–18h</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─────────────── FOOTER ─────────────────────────────── -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <div class="footer-logo">Lumière<span>.</span></div>
+          <p class="footer-desc">Clínica especializada em estética avançada e harmonização facial. Cuidado real para mulheres reais.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Procedimentos</h4>
+          <ul>
+            <li><a href="#">Botox</a></li>
+            <li><a href="#">Preenchimento Labial</a></li>
+            <li><a href="#">Harmonização Facial</a></li>
+            <li><a href="#">Limpeza de Pele</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Contato</h4>
+          <ul>
+            <li>São Paulo &mdash; SP</li>
+            <li>(11) 9 9999-9999</li>
+            <li>@clinicalumiere</li>
+            <li>Seg–Sáb: 9h às 18h</li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>&copy; 2025 Clínica Lumière. Todos os direitos reservados.</span>
+        <span>Feito com <span class="footer-heart">&hearts;</span> para mulheres que se valorizam</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ─────────────── WHATSAPP FLOAT ────────────────────── -->
+  <a href="https://wa.me/5511999999999?text=Olá!%20Gostaria%20de%20mais%20informações."
+     class="wa-float" target="_blank" rel="noopener" aria-label="Fale conosco pelo WhatsApp">
+    <span class="wa-tooltip">Fale conosco agora</span>
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+    </svg>
+  </a>
+
+  <!-- ─────────────── SCRIPTS ───────────────────────────── -->
+  <script>
+    /* ── Navbar scroll ── */
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 50);
+    }, { passive: true });
+
+    /* ── Scroll reveal (IntersectionObserver) ── */
+    const revealObs = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          revealObs.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+    document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+
+    /* Hero elements appear immediately */
+    document.querySelectorAll('.hero-panel .reveal').forEach((el, i) => {
+      setTimeout(() => el.classList.add('visible'), 150 + i * 120);
+    });
+
+    /* ── Before / After slider ── */
+    function initSlider(sliderEl, beforeLayer, line, btn) {
+      let active = false;
+
+      function setPos(x) {
+        const rect = sliderEl.getBoundingClientRect();
+        const pct = Math.max(2, Math.min(98, ((x - rect.left) / rect.width) * 100));
+        beforeLayer.style.clipPath = `inset(0 ${(100 - pct).toFixed(1)}% 0 0)`;
+        line.style.left = pct.toFixed(1) + '%';
+        btn.style.left  = pct.toFixed(1) + '%';
+      }
+
+      sliderEl.addEventListener('mousedown',  (e) => { active = true; setPos(e.clientX); });
+      sliderEl.addEventListener('touchstart', (e) => { active = true; setPos(e.touches[0].clientX); }, { passive: true });
+
+      window.addEventListener('mouseup',   () => active = false);
+      window.addEventListener('touchend',  () => active = false);
+
+      window.addEventListener('mousemove', (e) => { if (active) setPos(e.clientX); }, { passive: true });
+      window.addEventListener('touchmove', (e) => { if (active) setPos(e.touches[0].clientX); }, { passive: true });
+
+      /* Intro animation: slide to 60% after load */
+      setTimeout(() => {
+        const rect = sliderEl.getBoundingClientRect();
+        if (rect.width === 0) return;
+        setPos(rect.left + rect.width * 0.55);
+      }, 800);
+    }
+
+    function setupSliders() {
+      const s1 = document.getElementById('slider1');
+      if (s1) initSlider(s1, document.getElementById('s1-before'), document.getElementById('s1-line'), document.getElementById('s1-btn'));
+
+      const s2 = document.getElementById('slider2');
+      if (s2) initSlider(s2, document.getElementById('s2-before'), document.getElementById('s2-line'), document.getElementById('s2-btn'));
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', setupSliders);
+    } else {
+      setupSliders();
+    }
+  </script>
+
+</body>
+</html>
